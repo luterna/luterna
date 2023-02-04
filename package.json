@@ -2,11 +2,10 @@
   "name": "luterna",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@types/jsdom": "^20.0.1",
     "@types/node": "^18.11.12",
