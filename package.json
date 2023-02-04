@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "lint": "pnpm --stream -r run lint",
+    "type-check": "pnpm --stream -r run type-check",
+    "test": "pnpm --stream -r run test",
+    "lint:ci": "pnpm lint && pnpm type-check"
   },
   "private": true,
   "devDependencies": {
