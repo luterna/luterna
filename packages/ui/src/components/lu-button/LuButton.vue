@@ -37,38 +37,38 @@ const variantClass = computed(() => (props.disabled ? 'disabled' : props.variant
 
   &.filled {
     border: 1px solid transparent;
-    color: white;
-    background-color: use-var('baseButtonColor');
+    color: use-var('buttonTextColor');
+    background-color: use-var('buttonColor');
 
     &:not(.disabled):hover {
-      background-color: use-var('filledButtonHoverColor');
+      background-color: use-var('buttonHoverColor');
     }
   }
 
   &.outlined {
-    border: 1px solid use-var('baseButtonColor');
-    color: use-var('baseButtonColor');
+    border: 1px solid use-var('buttonColor');
+    color: use-var('buttonTextColor');
     background-color: transparent;
 
     &:not(.disabled):hover {
-      background-color: use-var('outlinedButtonHoverColor');
+      background-color: use-var('buttonHoverColor');
     }
   }
 
   &.light {
     border: 1px solid transparent;
-    color: use-var('baseButtonColor');
-    background-color: use-var('lightButtonColor');
+    color: use-var('buttonTextColor');
+    background-color: use-var('buttonColor');
 
     &:not(.disabled):hover {
-      background-color: use-var('lightButtonHoverColor');
+      background-color: use-var('buttonHoverColor');
     }
   }
 
   &.disabled {
     border: 1px solid transparent;
-    background-color: use-var('disabledButtonColor');
-    color: use-var('disabledButtonTextColor');
+    background-color: use-var('buttonColor');
+    color: use-var('buttonTextColor');
     cursor: not-allowed;
   }
 

@@ -1,16 +1,36 @@
 import { generateVars, useColor, type ColorProps } from '@/composables/use-color';
+import type { LuButtonVariant } from './types';
 
-export const useVars = (props?: ColorProps) => {
+type Props = ColorProps & {
+  variant?: LuButtonVariant;
+  disabled?: boolean;
+};
+
+export const useVars = (props?: Props) => {
   const color = useColor(props);
   const colorGray = useColor({ color: 'gray' });
 
-  return generateVars({
-    baseButtonColor: color.v(),
-    filledButtonHoverColor: color.v(7),
-    outlinedButtonHoverColor: color.v(7, 0.15),
-    lightButtonColor: color.v(7, 0.2),
-    lightButtonHoverColor: color.v(7, 0.3),
-    disabledButtonColor: colorGray.v(2, 0.2),
-    disabledButtonTextColor: colorGray.v(3),
-  });
+  const vars = {
+    buttonColor: color.v(),
+    buttonTextColor: color.v(),
+    buttonHoverColor: '',
+  };
+
+  if (props.disabled) {
+    vars.buttonColor = colorGray.v(2, 0.2);
+    vars.buttonTextColor = colorGray.v(3);
+    return generateVars(vars);
+  }
+
+  if (props.variant === 'filled') {
+    vars.buttonTextColor = 'white';
+    vars.buttonHoverColor = color.v(7);
+  } else if (props.variant === 'outlined') {
+    vars.buttonHoverColor = color.v(7, 0.15);
+  } else if (props.variant === 'light') {
+    vars.buttonColor = color.v(7, 0.2);
+    vars.buttonHoverColor = color.v(7, 0.3);
+  }
+
+  return generateVars(vars);
 };
