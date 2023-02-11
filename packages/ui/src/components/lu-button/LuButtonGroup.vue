@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { Orientation } from './types';
+import type { LuButtonGroupOrientation } from './types';
 
 withDefaults(
   defineProps<{
-    orientation?: Orientation;
+    orientation?: LuButtonGroupOrientation;
   }>(),
   {
     orientation: 'horizontal',

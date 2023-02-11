@@ -1,28 +1,32 @@
 <script lang="ts" setup>
+import type { AllowedColors } from '@/plugin/types';
 import { computed } from 'vue';
+import { useVars } from './lu-button';
 import type { LuButtonVariant } from './types';
 
-const props = withDefaults(
-  defineProps<{
-    variant?: LuButtonVariant;
-    disabled?: boolean;
-  }>(),
-  {
-    variant: 'filled',
-    disabled: false,
-  }
-);
+export type Props = {
+  variant?: LuButtonVariant;
+  disabled?: boolean;
+  color?: AllowedColors;
+};
+
+const props = withDefaults(defineProps<Props>(), {
+  variant: 'filled',
+  disabled: false,
+});
 
 const variantClass = computed(() => (props.disabled ? 'disabled' : props.variant));
 </script>
 
 <template>
-  <button :class="['lu-button', variantClass]">
+  <button :class="['lu-button', variantClass]" :style="useVars($props)">
     <span class="lu-button__text"><slot /></span>
   </button>
 </template>
 
 <style lang="scss">
+@import './src/styles/tools';
+
 .lu-button {
   padding: 0 1rem;
   font-weight: 600;
@@ -34,37 +38,37 @@ const variantClass = computed(() => (props.disabled ? 'disabled' : props.variant
   &.filled {
     border: 1px solid transparent;
     color: white;
-    background-color: #3a86ff;
+    background-color: use-var('baseButtonColor');
 
     &:not(.disabled):hover {
-      background-color: #3175e3;
+      background-color: use-var('filledButtonHoverColor');
     }
   }
 
   &.outlined {
-    border: 1px solid #3a86ff;
-    color: #3a86ff;
+    border: 1px solid use-var('baseButtonColor');
+    color: use-var('baseButtonColor');
     background-color: transparent;
 
     &:not(.disabled):hover {
-      background-color: #3a86ff20;
+      background-color: use-var('outlinedButtonHoverColor');
     }
   }
 
   &.light {
     border: 1px solid transparent;
-    color: #3a86ff;
-    background-color: #3ab3ff20;
+    color: use-var('baseButtonColor');
+    background-color: use-var('lightButtonColor');
 
     &:not(.disabled):hover {
-      background-color: #3ab3ff30;
+      background-color: use-var('lightButtonHoverColor');
     }
   }
 
   &.disabled {
     border: 1px solid transparent;
-    background-color: #e6eaf1;
-    color: #b5bac1;
+    background-color: use-var('disabledButtonColor');
+    color: use-var('disabledButtonTextColor');
     cursor: not-allowed;
   }
 

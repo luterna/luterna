@@ -1,0 +1,3 @@
+@function use-var($var) {
+  @return var(--luterna-#{$var});
+}
