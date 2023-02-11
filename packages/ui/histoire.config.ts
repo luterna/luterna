@@ -15,9 +15,9 @@ export default defineConfig({
     },
     favicon: 'favicon.svg',
     logo: {
-      square: './src/assets/img/logo.svg',
-      light: './src/assets/img/logo-light.svg',
-      dark: './src/assets/img/logo-dark.svg',
+      square: './src/assets/logo.svg',
+      light: './src/assets/logo-light.svg',
+      dark: './src/assets/logo-dark.svg',
     },
   },
 });
