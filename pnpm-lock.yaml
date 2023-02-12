@@ -21,7 +21,7 @@ importers:
 
   packages/ui:
     specifiers:
-      '@histoire/plugin-vue': ^0.12.4
+      '@histoire/plugin-vue': ^0.14.2
       '@rushstack/eslint-patch': ^1.1.4
       '@vitejs/plugin-vue': ^3.2.0
       '@vitest/coverage-c8': ^0.28.4
@@ -32,7 +32,7 @@ importers:
       '@vue/tsconfig': ^0.1.3
       eslint: '*'
       eslint-plugin-vue: ^9.3.0
-      histoire: ^0.12.4
+      histoire: ^0.14.2
       npm-run-all: ^4.1.5
       prettier: '*'
       sass: ^1.58.0
@@ -47,7 +47,7 @@ importers:
     dependencies:
       vue: 3.2.47
     devDependencies:
-      '@histoire/plugin-vue': 0.12.4_7pkrbhktbmkm3f3buknw6ywozi
+      '@histoire/plugin-vue': 0.14.2_amys7msjt6pn2cjkzkbfgmcf5y
       '@rushstack/eslint-patch': 1.2.0
       '@vitejs/plugin-vue': 3.2.0_vite@3.2.5+vue@3.2.47
       '@vitest/coverage-c8': 0.28.4_sass@1.58.0
@@ -58,7 +58,7 @@ importers:
       '@vue/tsconfig': 0.1.3
       eslint: 8.33.0
       eslint-plugin-vue: 9.9.0_eslint@8.33.0
-      histoire: 0.12.4_sass@1.58.0+vite@3.2.5
+      histoire: 0.14.2_sass@1.58.0+vite@3.2.5
       npm-run-all: 4.1.5
       prettier: 2.8.3
       sass: 1.58.0
@@ -190,21 +190,21 @@ packages:
       - supports-color
     dev: true
 
-  /@histoire/app/0.12.4_vite@3.2.5:
-    resolution: {integrity: sha512-noemJQ3q5ofHbBJGJ9FgLIdoV4Feyn3zHMhOQjHZRPETdoAak2adALO4UWKVnFu75+R43SLtoV7HnK0TAPx5kw==}
+  /@histoire/app/0.14.2_vite@3.2.5:
+    resolution: {integrity: sha512-mY91jH8UPFWYGLnTLbv5ntmly+Yd5etHDKV0+l+q/bRHaKrhGLOtJjr60wyqfxbZ6rDN2sjJAwNDEc6dozFqFw==}
     dependencies:
-      '@histoire/controls': 0.12.4
-      '@histoire/shared': 0.12.4_vite@3.2.5
-      '@histoire/vendors': 0.12.4
+      '@histoire/controls': 0.14.2
+      '@histoire/shared': 0.14.2_vite@3.2.5
+      '@histoire/vendors': 0.14.2
       '@types/flexsearch': 0.7.3
       flexsearch: 0.7.21
-      shiki-es: 0.1.2
+      shiki-es: 0.2.0
     transitivePeerDependencies:
       - vite
     dev: true
 
-  /@histoire/controls/0.12.4:
-    resolution: {integrity: sha512-p4qa11vXqhSMsnXW1p+n7ZqawoHVErLFL24yNnA9peMuXnR306/0cvdAnsLMQJdq5mDNayOY5Di69YKVQ0Shqg==}
+  /@histoire/controls/0.14.2:
+    resolution: {integrity: sha512-6pVyjwVxFLqsUb4stvXJ6BmXjr82tfWA4Gv0oipZcDB8zDxDhhx6ckuy+9l94W3BsQfH2ZaRruCv6dJUtqiFZQ==}
     dependencies:
       '@codemirror/commands': 6.2.0
       '@codemirror/lang-json': 6.0.1
@@ -213,29 +213,34 @@ packages:
       '@codemirror/state': 6.2.0
       '@codemirror/theme-one-dark': 6.1.0
       '@codemirror/view': 6.7.3
-      '@histoire/vendors': 0.12.4
+      '@histoire/vendors': 0.14.2
     dev: true
 
-  /@histoire/plugin-vue/0.12.4_7pkrbhktbmkm3f3buknw6ywozi:
-    resolution: {integrity: sha512-2xgBDwEHmiY053hPWy4rKnnMjntVcg8qfIYJGyITwFWSfNTq+6ez/HjWzUcHT6qwFMglUHq+rDlQb9gYZF+Edw==}
+  /@histoire/plugin-vue/0.14.2_amys7msjt6pn2cjkzkbfgmcf5y:
+    resolution: {integrity: sha512-pa56RTkNkVXKNnXEeQWEbAO0Yh7mHZRtfcPjHjZYvP0DLThD1WjO+WGspGbsK5Liaog3n3AOZYcqEmw6mSOmmw==}
     peerDependencies:
-      histoire: ^0.12.4
-      vue: ^3.2.31
+      histoire: ^0.14.2
+      vue: ^3.2.47
     dependencies:
-      '@histoire/controls': 0.12.4
-      '@histoire/shared': 0.12.4_vite@3.2.5
-      '@histoire/vendors': 0.12.4
-      histoire: 0.12.4_sass@1.58.0+vite@3.2.5
+      '@histoire/controls': 0.14.2
+      '@histoire/shared': 0.14.2_vite@3.2.5
+      '@histoire/vendors': 0.14.2
+      change-case: 4.1.2
+      globby: 13.1.3
+      histoire: 0.14.2_sass@1.58.0+vite@3.2.5
+      launch-editor: 2.6.0
+      pathe: 0.2.0
       vue: 3.2.47
     transitivePeerDependencies:
       - vite
     dev: true
 
-  /@histoire/shared/0.12.4_vite@3.2.5:
-    resolution: {integrity: sha512-dVSrfsEu17KczjyHVW8yPvSlguhEV7hWjDSwsjlUrRdbe7hwztX4GbbcCIWvG5hy5gASpKpQq6FJa5uTs0HOsg==}
+  /@histoire/shared/0.14.2_vite@3.2.5:
+    resolution: {integrity: sha512-Q7g8Yr8F2lb+/fnQExJYn5fLEqHgHtK47QqsiAWf6xX+v10r/JYLZUnI28jwEga5tLQTVTl6HEJ+yHqvJNFIiw==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0 || ^4.0.0
     dependencies:
+      '@histoire/vendors': 0.14.2
       '@types/fs-extra': 9.0.13
       '@types/markdown-it': 12.2.3
       chokidar: 3.5.3
@@ -244,8 +249,8 @@ packages:
       vite: 3.2.5_sass@1.58.0
     dev: true
 
-  /@histoire/vendors/0.12.4:
-    resolution: {integrity: sha512-NIi0krz19iSjPHhIsGLrW4Q3tvrCLfvCet2kFA8crKPX6inaMZm8g/+pDQBqlh9DRCXVbxV5RWQKcumrIFbrmw==}
+  /@histoire/vendors/0.14.2:
+    resolution: {integrity: sha512-x8B8KxHXSC8YdMAHJtJBBGQYXHP0jcxDxnytwrZOxoCtzwOYghHJNJ8wPfwboKNE0E3ot6vJSilZahwGVLX+nw==}
     dev: true
 
   /@humanwhocodes/config-array/0.11.8:
@@ -2269,16 +2274,16 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /histoire/0.12.4_sass@1.58.0+vite@3.2.5:
-    resolution: {integrity: sha512-q20Zncdh+GI2jDXiry1JS1DrN5qprKpl452AnS/P06Vgowqf79aG85E0XmhNpX2r8HI2HmIntwZ5FLd6hxYobQ==}
+  /histoire/0.14.2_sass@1.58.0+vite@3.2.5:
+    resolution: {integrity: sha512-nY9O5sIbtlUsGsLQqMGi601I09OKH7aZamYPcDlW7g1fmkf7IMb15xiREboMunQEIpDrpAH+9aWBxGIN+iQ5eA==}
     hasBin: true
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0 || ^4.0.0
     dependencies:
-      '@histoire/app': 0.12.4_vite@3.2.5
-      '@histoire/controls': 0.12.4
-      '@histoire/shared': 0.12.4_vite@3.2.5
-      '@histoire/vendors': 0.12.4
+      '@histoire/app': 0.14.2_vite@3.2.5
+      '@histoire/controls': 0.14.2
+      '@histoire/shared': 0.14.2_vite@3.2.5
+      '@histoire/vendors': 0.14.2
       '@types/flexsearch': 0.7.3
       '@types/markdown-it': 12.2.3
       birpc: 0.1.1
@@ -2302,11 +2307,11 @@ packages:
       pathe: 0.2.0
       picocolors: 1.0.0
       sade: 1.8.1
-      shiki-es: 0.1.2
+      shiki-es: 0.2.0
       sirv: 2.0.2
       tinypool: 0.1.3
       vite: 3.2.5_sass@1.58.0
-      vite-node: 0.26.0_sass@1.58.0
+      vite-node: 0.28.4_sass@1.58.0
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -2706,6 +2711,13 @@ packages:
 
   /kolorist/1.7.0:
     resolution: {integrity: sha512-ymToLHqL02udwVdbkowNpzjFd6UzozMtshPQKVi5k1EjKRqKqBrOnE9QbLEb0/pV76SAiIT13hdL8R6suc+f3g==}
+    dev: true
+
+  /launch-editor/2.6.0:
+    resolution: {integrity: sha512-JpDCcQnyAAzZZaZ7vEiSqL690w7dAEyLao+KC96zBplnYbJS7TYNjvM3M7y3dGz+v7aIsJk3hllWuc0kWAjyRQ==}
+    dependencies:
+      picocolors: 1.0.0
+      shell-quote: 1.8.0
     dev: true
 
   /levn/0.3.0:
@@ -3466,8 +3478,8 @@ packages:
     resolution: {integrity: sha512-QHsz8GgQIGKlRi24yFc6a6lN69Idnx634w49ay6+jA5yFh7a1UY+4Rp6HPx/L/1zcEDPEij8cIsiqR6bQsE5VQ==}
     dev: true
 
-  /shiki-es/0.1.2:
-    resolution: {integrity: sha512-eqtfk8idlYlSLAn0gp0Ly2+FbKc2d78IddigHSS4iHAnpXoY2kdRzyFGZOdi6TvemYMnRhZBi1HsSqZc5eNKqg==}
+  /shiki-es/0.2.0:
+    resolution: {integrity: sha512-RbRMD+IuJJseSZljDdne9ThrUYrwBwJR04FvN4VXpfsU3MNID5VJGHLAD5je/HGThCyEKNgH+nEkSFEWKD7C3Q==}
     dev: true
 
   /side-channel/1.0.4:
@@ -3918,27 +3930,6 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /vite-node/0.26.0_sass@1.58.0:
-    resolution: {integrity: sha512-nLtHWCv6reONl1oFsKhQ/LT7n3UNLpvVARAJlmGrQV6qSElht/9AdN41Pa+WSkw2Winh682UzM0Yw0GNlfqejw==}
-    engines: {node: '>=v14.16.0'}
-    hasBin: true
-    dependencies:
-      debug: 4.3.4
-      mlly: 1.1.0
-      pathe: 0.2.0
-      source-map: 0.6.1
-      source-map-support: 0.5.21
-      vite: 3.2.5_sass@1.58.0
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
-
   /vite-node/0.28.4_f5vcjb3akvjdur4ffzogu2hewu:
     resolution: {integrity: sha512-KM0Q0uSG/xHHKOJvVHc5xDBabgt0l70y7/lWTR7Q0pR5/MrYxadT+y32cJOE65FfjGmJgxpVEEY+69btJgcXOQ==}
     engines: {node: '>=v14.16.0'}
@@ -3952,6 +3943,29 @@ packages:
       source-map: 0.6.1
       source-map-support: 0.5.21
       vite: 3.2.5_f5vcjb3akvjdur4ffzogu2hewu
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
+
+  /vite-node/0.28.4_sass@1.58.0:
+    resolution: {integrity: sha512-KM0Q0uSG/xHHKOJvVHc5xDBabgt0l70y7/lWTR7Q0pR5/MrYxadT+y32cJOE65FfjGmJgxpVEEY+69btJgcXOQ==}
+    engines: {node: '>=v14.16.0'}
+    hasBin: true
+    dependencies:
+      cac: 6.7.14
+      debug: 4.3.4
+      mlly: 1.1.0
+      pathe: 1.1.0
+      picocolors: 1.0.0
+      source-map: 0.6.1
+      source-map-support: 0.5.21
+      vite: 3.2.5_sass@1.58.0
     transitivePeerDependencies:
       - '@types/node'
       - less
