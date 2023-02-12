@@ -35,7 +35,8 @@ const toRgb = (color: string): [number, number, number] => {
 
   const hslaMatch = hslaRegex.exec(normalizedColor);
   if (hslaMatch) {
-    const [h, s, l, _] = Array.from(hslaMatch).slice(1).map(parseFloat);
+    const [h, s, l] = Array.from(hslaMatch).slice(1).map(parseFloat);
+    console.log(h, s, l);
     if (guard(0, 100, s) !== s) throw new Error(color);
     if (guard(0, 100, l) !== l) throw new Error(color);
     return [...hslToRgb(h, s, l)] as [number, number, number];
