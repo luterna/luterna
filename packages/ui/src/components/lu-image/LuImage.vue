@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import PlaceholderIcon from './icons/PlaceholderIcon.vue';
+import { useVars } from './lu-image';
 import type { FitOptions } from './types';
 
 const props = withDefaults(
@@ -34,7 +35,7 @@ watch(
 </script>
 
 <template>
-  <div class="lu-image">
+  <div class="lu-image" :style="useVars()">
     <figure class="lu-image__figure">
       <div class="lu-image__internals">
         <img
@@ -60,6 +61,8 @@ watch(
 </template>
 
 <style lang="scss">
+@import './src/styles/tools';
+
 .lu-image {
   width: v-bind(computedWidth);
   height: auto;
@@ -88,14 +91,14 @@ watch(
   &__placeholder {
     position: absolute;
     inset: 0;
-    background-color: #f7f8f9;
+    background-color: use-var('backgroundColor');
     min-height: fit-content;
     width: v-bind(computedWidth);
     height: v-bind(computedHeight);
 
     &__icon {
       width: 40px;
-      color: #acb5bd;
+      color: use-var('iconColor');
     }
   }
 
@@ -104,7 +107,7 @@ watch(
     text-align: center;
     font-size: 14px;
     line-height: 1.5;
-    color: #444b53;
+    color: use-var('captionColor');
   }
 }
 </style>

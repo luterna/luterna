@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 import LuButton from './LuButton.vue';
-import type { Orientation } from './types';
+import { luButtonGroupOrientation, type LuButtonGroupOrientation } from './types';
 import LuButtonGroup from './LuButtonGroup.vue';
 
 type State = {
-  orientation: Orientation;
+  orientation: LuButtonGroupOrientation;
 };
 
 const state = reactive<State>({
@@ -21,14 +21,7 @@ const state = reactive<State>({
       <LuButton variant="outlined"> Third </LuButton>
     </LuButtonGroup>
     <template #controls>
-      <HstSelect
-        v-model="state.orientation"
-        title="orientation"
-        :options="{
-          horizontal: 'horizontal',
-          vertical: 'vertical',
-        }"
-      />
+      <HstSelect v-model="state.orientation" title="orientation" :options="luButtonGroupOrientation" />
     </template>
   </Story>
 </template>
