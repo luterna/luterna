@@ -10,7 +10,7 @@ export const useColor = (props?: ColorProps) => {
   const config = useLuternaConfig();
   const color = computed(() => props?.color || config.theme.accentColor);
   const v = (variation: number = 6, alpha: number = 1) =>
-    `hsl(var(--luterna-color-${color.value}-${variation}), ${alpha})`;
+    `rgba(var(--luterna-color-${color.value}-${variation}), ${alpha})`;
   return {
     color,
     v,

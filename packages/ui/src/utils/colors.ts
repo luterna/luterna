@@ -4,40 +4,13 @@ const guard = (low: number, high: number, value: number): number => {
   return Math.min(Math.max(low, value), high);
 };
 
-const hsl = (hue: number, saturation: number, lightness: number): string => {
-  return `${(hue % 360).toFixed()}, ${guard(0, 100, saturation * 100).toFixed()}%, ${guard(
-    0,
-    100,
-    lightness * 100
-  ).toFixed()}%`;
+const rgb = (red: number, green: number, blue: number): string => {
+  return `${guard(0, 255, red).toFixed()}, ${guard(0, 255, green).toFixed()}, ${guard(0, 255, blue).toFixed()}`;
 };
 
-const toHsla = (color: string): [number, number, number, number] => {
-  const [red, green, blue, alpha] = toRgba(color).map((value, index) => (index === 3 ? value : value / 255));
-
-  const max = Math.max(red, green, blue);
-  const min = Math.min(red, green, blue);
-  const lightness = (max + min) / 2;
-
-  if (max === min) return [0, 0, lightness, alpha];
-
-  const delta = max - min;
-  const saturation = lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
-
-  const hue =
-    60 *
-    (red === max
-      ? (green - blue) / delta + (green < blue ? 6 : 0)
-      : green === max
-      ? (blue - red) / delta + 2
-      : (red - green) / delta + 4);
-
-  return [hue, saturation, lightness, alpha];
-};
-
-const toRgba = (color: string): [number, number, number, number] => {
+const toRgb = (color: string): [number, number, number] => {
   if (typeof color !== 'string') throw new Error(color);
-  if (color.trim().toLowerCase() === 'transparent') return [0, 0, 0, 0];
+  if (color.trim().toLowerCase() === 'transparent') return [0, 0, 0];
 
   let normalizedColor = color.trim();
   normalizedColor = namedColorRegex.test(color) ? nameToHex(color) : color;
@@ -45,42 +18,27 @@ const toRgba = (color: string): [number, number, number, number] => {
   const reducedHexMatch = reducedHexRegex.exec(normalizedColor);
   if (reducedHexMatch) {
     const arr = Array.from(reducedHexMatch).slice(1);
-    return [...arr.slice(0, 3).map((x) => parseInt(r(x, 2), 16)), parseInt(r(arr[3] || 'f', 2), 16) / 255] as [
-      number,
-      number,
-      number,
-      number
-    ];
+    return arr.slice(0, 3).map((x) => parseInt(r(x, 2), 16)) as [number, number, number];
   }
 
   const hexMatch = hexRegex.exec(normalizedColor);
   if (hexMatch) {
     const arr = Array.from(hexMatch).slice(1);
-    return [...arr.slice(0, 3).map((x) => parseInt(x, 16)), parseInt(arr[3] || 'ff', 16) / 255] as [
-      number,
-      number,
-      number,
-      number
-    ];
+    return arr.slice(0, 3).map((x) => parseInt(x, 16)) as [number, number, number];
   }
 
   const rgbaMatch = rgbaRegex.exec(normalizedColor);
   if (rgbaMatch) {
     const arr = Array.from(rgbaMatch).slice(1);
-    return [...arr.slice(0, 3).map((x) => parseInt(x, 10)), parseFloat(arr[3] || '1')] as [
-      number,
-      number,
-      number,
-      number
-    ];
+    return arr.slice(0, 3).map((x) => parseInt(x, 10)) as [number, number, number];
   }
 
   const hslaMatch = hslaRegex.exec(normalizedColor);
   if (hslaMatch) {
-    const [h, s, l, a] = Array.from(hslaMatch).slice(1).map(parseFloat);
+    const [h, s, l, _] = Array.from(hslaMatch).slice(1).map(parseFloat);
     if (guard(0, 100, s) !== s) throw new Error(color);
     if (guard(0, 100, l) !== l) throw new Error(color);
-    return [...hslToRgb(h, s, l), Number.isNaN(a) ? 1 : a] as [number, number, number, number];
+    return [...hslToRgb(h, s, l)] as [number, number, number];
   }
 
   throw new Error(color);
@@ -179,9 +137,29 @@ const hslToRgb = (hue: number, saturation: number, lightness: number): [number, 
   return [finalRed, finalGreen, finalBlue].map(roundColor) as [number, number, number];
 };
 
-const lightnessModifiers = [1.7, 1.8, 1.4, 1.3, 1.2, 1.1, 1.0, 0.9, 0.8, 0.5];
+const mix = (color1: string, color2: string, weight: number): string => {
+  const normalize = (n: number, index: number) => (index === 3 ? n : n / 255);
 
-export const getColorVariations = (color: AllowedColors) => {
-  const [h, s, l, _] = toHsla(color);
-  return lightnessModifiers.map((modifier) => hsl(h, s, l * modifier));
+  const [r1, g1, b1] = toRgb(color1).map(normalize);
+  const [r2, g2, b2] = toRgb(color2).map(normalize);
+
+  const weight1 = 1 - weight;
+
+  const r = (r1 * weight1 + r2 * weight) * 255;
+  const g = (g1 * weight1 + g2 * weight) * 255;
+  const b = (b1 * weight1 + b2 * weight) * 255;
+
+  return rgb(r, g, b);
+};
+
+export const getColorVariations = (color: AllowedColors): string[] => {
+  const colors: string[] = [];
+  for (let i = 1; i < 7; i++) {
+    colors.push(mix('white', color, i * 0.1));
+  }
+  colors.push(rgb(...toRgb(color)));
+  for (let i = 9; i > 6; i--) {
+    colors.push(mix('black', color, i * 0.1));
+  }
+  return colors;
 };
