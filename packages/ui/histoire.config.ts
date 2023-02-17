@@ -20,4 +20,20 @@ export default defineConfig({
       dark: './src/assets/logo-dark.svg',
     },
   },
+  tree: {
+    groups: [
+      {
+        id: 'buttons',
+        title: 'Buttons',
+      },
+      {
+        id: 'data',
+        title: 'Data display',
+      },
+      {
+        id: 'styles',
+        title: 'Styles',
+      },
+    ],
+  },
 });

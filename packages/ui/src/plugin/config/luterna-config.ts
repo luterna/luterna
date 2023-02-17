@@ -21,7 +21,7 @@ const getColorVariables = (theme: LuternaTheme) => {
 
   Object.keys(theme.colors).forEach((key) => {
     getColorVariations(theme.colors[key]).forEach((colorVariant, index) => {
-      variables.push(`--luterna-color-${key}-${index}: ${colorVariant}`);
+      variables.push(`--lu-${key}-${index}: ${colorVariant}`);
     });
   });
   return variables;
@@ -33,10 +33,12 @@ export const createLuternaConfig = (config: DeepPartial<LuternaConfig> = {}) => 
   const styles = computed(() => {
     const lines = [];
     const { theme } = luternaConfig;
+
     createCssClass(lines, ':root', [
       `color-scheme: ${theme.colorScheme}`,
-      `--luterna-fontFamily: ${theme.fontFamily}`,
+      `--lu-fontFamily: ${theme.fontFamily}`,
       ...getColorVariables(theme),
+      `--lu-fontColor: rgb(var(--lu-dark-7))`,
     ]);
     return lines.join('');
   });

@@ -1,4 +1,5 @@
-* {
+[class*='lu-'] {
   box-sizing: border-box;
-  font-family: var(--luterna-fontFamily);
+  font-family: var(--lu-fontFamily);
+  color: var(--lu-fontColor);
 }
