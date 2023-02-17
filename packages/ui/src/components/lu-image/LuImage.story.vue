@@ -16,7 +16,7 @@ const state = reactive({
 </script>
 
 <template>
-  <Story title="LuImage" icon="ion:image-outline" auto-props-disabled>
+  <Story title="LuImage" icon="ion:image-outline" group="data" autoPropsDisabled>
     <LuImage v-bind="state" @error="logEvent('error', $event)" />
     <template #controls>
       <HstText v-model="state.src" title="src" />

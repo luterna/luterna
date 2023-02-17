@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import PlaceholderIcon from './icons/PlaceholderIcon.vue';
-import { useVars } from './lu-image';
 import type { FitOptions } from './types';
 
 const props = withDefaults(
@@ -25,9 +24,6 @@ const props = withDefaults(
 
 const loadingError = ref(!props.src);
 
-const computedWidth = computed(() => (props.width ? `${props.width}px` : '100%'));
-const computedHeight = computed(() => (props.height ? `${props.height}px` : 'auto'));
-
 watch(
   () => props.src,
   () => (loadingError.value = false)
@@ -35,7 +31,7 @@ watch(
 </script>
 
 <template>
-  <div class="lu-image" :style="useVars()">
+  <div class="lu-image">
     <figure class="lu-image__figure">
       <div class="lu-image__internals">
         <img
@@ -45,9 +41,10 @@ watch(
           :width="width"
           :height="height"
           :alt="alt"
+          :style="{ objectFit: fit }"
           @error="loadingError = true"
         />
-        <div v-if="withPlaceholder && loadingError" class="lu-image__placeholder">
+        <div v-if="withPlaceholder && loadingError" class="lu-image__placeholder" :style="{ height: `${height}px` }">
           <slot name="placeholder">
             <PlaceholderIcon class="lu-image__placeholder__icon" />
           </slot>
@@ -61,10 +58,8 @@ watch(
 </template>
 
 <style lang="scss">
-@import './src/styles/tools';
-
 .lu-image {
-  width: v-bind(computedWidth);
+  width: fit-content;
   height: auto;
 
   &__figure {
@@ -83,22 +78,19 @@ watch(
 
   &__image {
     display: block;
-    width: v-bind(computedWidth);
-    height: v-bind(computedHeight);
-    object-fit: v-bind('props.fit');
+    transition: all 0.25s ease;
   }
 
   &__placeholder {
     position: absolute;
     inset: 0;
-    background-color: use-var('backgroundColor');
+    background-color: rgb(var(--lu-gray-0));
+    transition: all 0.25s ease;
     min-height: fit-content;
-    width: v-bind(computedWidth);
-    height: v-bind(computedHeight);
 
     &__icon {
       width: 40px;
-      color: use-var('iconColor');
+      color: rgb(var(--lu-gray-5));
     }
   }
 
@@ -107,7 +99,7 @@ watch(
     text-align: center;
     font-size: 14px;
     line-height: 1.5;
-    color: use-var('captionColor');
+    color: rgb(var(--lu-gray-9));
   }
 }
 </style>

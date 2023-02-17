@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import type { AllowedColors } from '@/plugin/types';
-import { computed } from 'vue';
-import { useVars } from './lu-button';
 import type { LuButtonVariant } from './types';
 
 export type Props = {
@@ -10,70 +8,117 @@ export type Props = {
   color?: AllowedColors;
 };
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: 'filled',
   disabled: false,
+  color: 'primary',
 });
-
-const variantClass = computed(() => (props.disabled ? 'disabled' : props.variant));
 </script>
 
 <template>
-  <button :class="['lu-button', variantClass]" :style="useVars($props)">
+  <button :class="['lu-button', variant, color, { disabled }]">
     <span class="lu-button__text"><slot /></span>
   </button>
 </template>
 
 <style lang="scss">
-@import './src/styles/tools';
-
 .lu-button {
+  $parent: &;
+
   padding: 0 1rem;
   font-weight: 600;
   outline: none;
   height: 2.25rem;
   border-radius: 0.25rem;
+  transition: all 0.25s ease;
   cursor: pointer;
+
+  &.primary {
+    --lu-color: var(--lu-primary-6);
+    --lu-hover-color: var(--lu-primary-7);
+  }
+
+  &.danger {
+    --lu-color: var(--lu-danger-6);
+    --lu-hover-color: var(--lu-danger-7);
+  }
+
+  &.error {
+    --lu-color: var(--lu-error-6);
+    --lu-hover-color: var(--lu-error-7);
+  }
+
+  &.warning {
+    --lu-color: var(--lu-warning-6);
+    --lu-hover-color: var(--lu-warning-7);
+  }
+
+  &.success {
+    --lu-color: var(--lu-success-6);
+    --lu-hover-color: var(--lu-success-7);
+  }
+
+  &.gray {
+    --lu-color: var(--lu-gray-6);
+    --lu-hover-color: var(--lu-gray-8);
+  }
+
+  &.dark {
+    --lu-color: var(--lu-dark-6);
+    --lu-hover-color: var(--lu-dark-8);
+  }
 
   &.filled {
     border: 1px solid transparent;
-    color: use-var('buttonTextColor');
-    background-color: use-var('buttonColor');
+    background-color: rgb(var(--lu-color));
+
+    #{$parent}__text {
+      color: white;
+    }
 
     &:not(.disabled):hover {
-      background-color: use-var('buttonHoverColor');
+      background-color: rgb(var(--lu-hover-color));
     }
   }
 
   &.outlined {
-    border: 1px solid use-var('buttonColor');
-    color: use-var('buttonTextColor');
+    border: 1px solid rgb(var(--lu-color));
     background-color: transparent;
 
+    #{$parent}__text {
+      color: rgb(var(--lu-color));
+    }
+
     &:not(.disabled):hover {
-      background-color: use-var('buttonHoverColor');
+      background-color: rgba(var(--lu-color), 0.15);
     }
   }
 
   &.light {
     border: 1px solid transparent;
-    color: use-var('buttonTextColor');
-    background-color: use-var('buttonColor');
+    background-color: rgba(var(--lu-color), 0.2);
+
+    #{$parent}__text {
+      color: rgb(var(--lu-color));
+    }
 
     &:not(.disabled):hover {
-      background-color: use-var('buttonHoverColor');
+      background-color: rgba(var(--lu-color), 0.3);
     }
   }
 
   &.disabled {
     border: 1px solid transparent;
-    background-color: use-var('buttonColor');
-    color: use-var('buttonTextColor');
+    background-color: rgba(var(--lu-gray-4), 0.2);
     cursor: not-allowed;
+
+    #{$parent}__text {
+      color: rgb(var(--lu-gray-5));
+    }
   }
 
   &:not(.disabled):active {
-    transform: translateY(1px);
+    transform: translateY(2px);
   }
 }
 </style>
