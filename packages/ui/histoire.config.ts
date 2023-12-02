@@ -27,6 +27,10 @@ export default defineConfig({
         title: 'Buttons',
       },
       {
+        id: 'inputs',
+        title: 'Inputs',
+      },
+      {
         id: 'layout',
         title: 'Layout',
       },
