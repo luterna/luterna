@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { LuternaSizes } from '@/plugin/types';
 import { computed } from 'vue';
 
 const emit = defineEmits<{
@@ -14,6 +15,8 @@ const props = withDefaults(
     description?: string;
     error?: string | boolean;
     modelValue?: string;
+    radius: LuternaSizes;
+    size: LuternaSizes;
   }>(),
   {
     disabled: false,
@@ -23,6 +26,8 @@ const props = withDefaults(
     description: '',
     error: false,
     modelValue: '',
+    radius: 'sm',
+    size: 'sm',
   }
 );
 
@@ -33,19 +38,18 @@ const localModelValue = computed({
 </script>
 
 <template>
-  <div class="lu-input">
+  <div :class="['lu-input', size]">
     <label class="lu-input__label" v-if="label">
       {{ label }}
-      <span v-if="required" class="lu-input__required-mark">*</span>
+      <span v-if="required" class="lu-input__label__required-mark">*</span>
     </label>
     <div v-if="description" class="lu-input__description">{{ description }}</div>
     <div class="lu-input__wrapper">
       <input
         v-model="localModelValue"
-        :class="['lu-input__input', { error }]"
+        :class="['lu-input__input', { error }, `radius-${radius}`]"
         :disabled="disabled"
         :placeholder="placeholder"
-        v-on="$attrs"
       />
     </div>
     <div v-if="error && typeof error === 'string'" class="lu-input__error">{{ error }}</div>
@@ -54,21 +58,52 @@ const localModelValue = computed({
 
 <style lang="scss">
 .lu-input {
-  &__label {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.2;
+  &.xs {
+    --lu-input-padding-x: 0.875rem;
+    --lu-input-height: 1.875rem;
+    --lu-input-font-size: var(--lu-fontSize-xs);
   }
 
-  &__required-mark {
-    color: rgb(var(--lu-error-6));
-    line-height: 1.2;
+  &.sm {
+    --lu-input-padding-x: 1.125rem;
+    --lu-input-height: 2.25rem;
+    --lu-input-font-size: var(--lu-fontSize-sm);
+  }
+
+  &.md {
+    --lu-input-padding-x: 1.375rem;
+    --lu-input-height: 2.625rem;
+    --lu-input-font-size: var(--lu-fontSize-md);
+  }
+
+  &.lg {
+    --lu-input-padding-x: 1.625rem;
+    --lu-input-height: 3.125rem;
+    --lu-input-font-size: var(--lu-fontSize-lg);
+  }
+
+  &.xl {
+    --lu-input-padding-x: 2rem;
+    --lu-input-height: 3.75rem;
+    --lu-input-font-size: var(--lu-fontSize-xl);
+  }
+
+  &__label {
+    font-size: var(--lu-input-font-size);
+    font-weight: 500;
+    line-height: 1.5;
+    transition: all 0.25s ease;
+    &__required-mark {
+      color: rgb(var(--lu-error-6));
+      line-height: 1.5;
+    }
   }
 
   &__error,
   &__description {
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: calc(var(--lu-input-font-size) - 0.125rem);
+    line-height: 1.5;
+    transition: all 0.25s ease;
   }
 
   &__description {
@@ -85,14 +120,34 @@ const localModelValue = computed({
 
   &__input {
     border: 1px solid rgb(var(--lu-gray-6), 0.2);
-    height: 2.25rem;
-    padding: 0 10px;
     background-color: transparent;
-    border-radius: 4px;
     outline-color: transparent;
     outline-width: 0;
     width: 100%;
     transition: all 0.25s ease;
+    padding: 0 var(--lu-input-padding-x);
+    height: var(--lu-input-height);
+    font-size: var(--lu-input-font-size);
+
+    &.radius-xs {
+      border-radius: var(--lu-borderRadius-xs);
+    }
+
+    &.radius-sm {
+      border-radius: var(--lu-borderRadius-sm);
+    }
+
+    &.radius-md {
+      border-radius: var(--lu-borderRadius-md);
+    }
+
+    &.radius-lg {
+      border-radius: var(--lu-borderRadius-lg);
+    }
+
+    &.radius-xl {
+      border-radius: var(--lu-borderRadius-xl);
+    }
 
     &.error {
       border-color: rgb(var(--lu-error-6));
@@ -108,7 +163,7 @@ const localModelValue = computed({
     }
 
     &:focus {
-      padding: 0 12px;
+      padding: 0 calc(var(--lu-input-padding-x) + var(--lu-input-padding-x) / 5);
     }
 
     &:disabled {
