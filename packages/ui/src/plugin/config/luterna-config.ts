@@ -27,6 +27,15 @@ const getColorVariables = (theme: LuternaTheme) => {
   return variables;
 };
 
+const objectToVariable = (key: keyof LuternaTheme, theme: LuternaTheme) => {
+  const variables: string[] = [];
+
+  Object.keys(theme[key]).forEach((k) => {
+    variables.push(`--lu-${key}-${k}: ${theme[key][k]}`);
+  });
+  return variables;
+};
+
 export const createLuternaConfig = (config: DeepPartial<LuternaConfig> = {}) => {
   const newConfig = deepMerge(defaultConfig, config);
 
@@ -38,6 +47,8 @@ export const createLuternaConfig = (config: DeepPartial<LuternaConfig> = {}) => 
       `color-scheme: ${theme.colorScheme}`,
       `--lu-fontFamily: ${theme.fontFamily}`,
       ...getColorVariables(theme),
+      ...objectToVariable('borderRadius', theme),
+      ...objectToVariable('fontSize', theme),
       `--lu-fontColor: rgb(var(--lu-dark-7))`,
     ]);
     return lines.join('');
@@ -48,7 +59,6 @@ export const createLuternaConfig = (config: DeepPartial<LuternaConfig> = {}) => 
   const updateStyles = () => {
     if (document !== undefined && !styleEl) {
       const el = document.createElement('style') as HTMLStyleElement;
-      el.type = 'text/css';
       el.id = 'luterna-stylesheet';
 
       styleEl = el;
